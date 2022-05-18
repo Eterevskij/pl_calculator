@@ -1,25 +1,55 @@
 import React, { useState } from 'react';
-import { Row, Col, Select, Button } from 'antd';
-
-import CalculatorSlider from './CalculatorSlider';
+import { Row, Col, Select, Button, Slider } from 'antd';
 
 
-
+const creditTermOptions = [
+    "3 месяца",
+    "6 месяца",
+    "9 месяца",
+    "1 год",
+    "2 года",
+    "3 года",
+    "4 года",
+    "5 лет",
+    "6 лет",
+    "7 лет",
+    "8 лет",
+    "9 лет",
+    "10 лет",
+    "11 лет",
+    "12 лет",
+    "13 лет",
+    "14 лет",
+    "15 лет",
+]
 
 
 const PriceCalculator = () => {
 
-    const interestRate = 10.2;
-
     const Option = Select.Option;
 
-    const [loanAmount, setLoanAmount] = useState(); // сумма кредита
-    const [initialFee, setInitialFee] = useState(); // первоначальный взнос
-    const [creditTerm, setCreditTerm] = useState(); // срок кредита
+    const [sliderValue, setSliderValue] = useState({
+        loanAmount: 1000000,
+        initialFee: 1000000,
+        creditTerm: 0
+    });
 
-    let loanTotal = loanAmount - initialFee;
-    let monthlyPayment = loanTotal / creditTerm;
-    const taxDeduction = loanAmount / 10;
+    const interestRate = 10.2;
+    const taxDeduction = 1480743;
+    const loanTotal = 2480743;
+    const monthlyPayment = 80743;
+
+    const handleSlider = (sliderName, value) => {
+
+        if(sliderName === 'loanAmount' && value < sliderValue.initialFee) {
+            setSliderValue({ ...sliderValue, ['initialFee']: value,[sliderName]: value  })
+        } else if(sliderName === 'initialFee' && value > sliderValue.loanAmount) {
+            setSliderValue({ ...sliderValue, ['initialFee']: sliderValue.loanAmount})
+        } else {
+            setSliderValue({ ...sliderValue, [sliderName]: value })
+        }
+
+    }
 
     return (
         <div className="calculator__wrapper">
@@ -54,9 +84,80 @@ const PriceCalculator = () => {
                         </div>
 
                         <div className="calculator__content__sliders__wrapper">
-                            <CalculatorSlider handler={setLoanAmount} title='Сумма кредита' type='money' min={1500000} max={60000000} />
-                            <CalculatorSlider handler={setInitialFee} loanAmount={loanAmount} initialFee title='Первоначальный взнос' type='money' min={1500000} max={60000000} />
-                            <CalculatorSlider handler={setCreditTerm} title='Срок кредита' type='month' min={3} max={180} />
+
+                            <div className="calculatorSlider__wrapper">
+
+                                <p className="calculatorSlider__title">Сумма кредита</p>
+
+                                <p className="calculatorSlider__currentValue">{sliderValue.loanAmount.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1 ")}₽</p>
+
+                                <Slider
+                                    min={1500000}
+                                    max={60000000}
+                                    step={10000}
+                                    onChange={(value) => handleSlider('loanAmount', value)}
+                                    className="calculatorSlider__slider"
+                                    tipFormatter={null}
+                                    value={sliderValue.loanAmount}
+                                />
+
+                                <div className="calculatorSlider__range__wrapper">
+
+                                    <p className="calculatorSlider__range__item">1,5 млн ₽</p>
+                                    <p className="calculatorSlider__range__item">60 млн ₽</p>
+
+                                </div>
+
+                            </div>
+                            <div className="calculatorSlider__wrapper">
+
+                                <p className="calculatorSlider__title">Первоначальный взнос</p>
+
+                                <p className="calculatorSlider__currentValue">{sliderValue.initialFee.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1 ")}₽</p>
+
+                                <Slider
+                                    min={1500000}
+                                    max={60000000}
+                                    step={10000}
+                                    onChange={(value) => handleSlider('initialFee', value)}
+                                    className="calculatorSlider__slider"
+                                    tipFormatter={null}
+                                    value={sliderValue.initialFee}
+                                />
+
+                                <div className="calculatorSlider__range__wrapper">
+
+                                    <p className="calculatorSlider__range__item">1,5 млн ₽</p>
+                                    <p className="calculatorSlider__range__item">60 млн ₽</p>
+
+                                </div>
+
+                            </div>
+
+                            <div className="calculatorSlider__wrapper">
+
+                                <p className="calculatorSlider__title">Срок кредита</p>
+                                <p className="calculatorSlider__currentValue">{creditTermOptions[sliderValue.creditTerm]}</p>
+
+                                <Slider
+                                    min={0}
+                                    max={creditTermOptions.length - 1}
+                                    step={1}
+                                    onChange={(value) => handleSlider('creditTerm', value)}
+                                    className="calculatorSlider__slider"
+                                    tipFormatter={null}
+                                    value={sliderValue.creditTerm}
+                                />
+
+                                <div className="calculatorSlider__range__wrapper">
+
+                                    <p className="calculatorSlider__range__item">От 3 месяцев</p>
+                                    <p className="calculatorSlider__range__item">До 15 лет</p>
+
+                                </div>
+
+                            </div>
+
                         </div>
 
                     </Col>
