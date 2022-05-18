@@ -1,38 +1,137 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+p {
+  margin-bottom: 0em !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+body {
+  background: #adadad !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.calculator__wrapper {
+  background: #fff;
+  font-family: Inter;
+  margin: 0 auto;
+  max-width: 976px;
+  padding: 40px 48px;
+  border-radius: 16px;
+  position: relative;
+}
+
+.calculator__subtitle {
+  margin-top: 8px;
+  font-size: 16px;
+  color: #2b2b2b;
+}
+
+.calculator__subtitle__bank {
+  color: #4db663;
+  font-weight: 600;
+}
+
+.calculator__title {
+ color: #2b2b2b;
+ font-weight: 600;
+  font-size: 24px;
+}
+
+.calculator__content {
+  margin-top: 32px;
+}
+
+.calculator__content__select {
+  width: 100%;
+}
+
+.calculator__content__select + .calculator__content__select {
+  margin-top: 16px;
+}
+
+.calculator__content__sliders__wrapper {
+  margin-top: 32px;
+}
+
+.calculatorSlider__title {
+  color: #7a7a7a;
+}
+
+.calculatorSlider__currentValue {
+  margin-top: 8px;
+  color: #2b2b2b;
+  font-size: 24px;
+}
+
+.calculatorSlider__range__wrapper {
+  margin-top: 7px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
+  color: #7a7a7a;
+  font-size: 13px;
 }
 
-.App-link {
-  color: #61dafb;
+.calculatorSlider__slider .ant-slider-track {
+  height: 5px;
+  background: #4db663 !important;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.calculatorSlider__slider .ant-slider-rail {
+  height: 5px;
+  background: #BCBEC0 !important;
+}
+
+.calculatorSlider__slider  .ant-slider-handle {
+  width: 32px;
+  height: 23px;
+  margin-top: -9px;
+  border-radius: 10px;
+  border: solid 3px #6DB266 !important;
+  box-shadow: none !important;
+}
+
+.calculatorSlider__wrapper + .calculatorSlider__wrapper {
+  margin-top: 32px;
+}
+
+.calculator__calculatedBlock {
+  padding: 32px;
+  border-radius: 12px;
+  background: #f4f4f4;
+}
+
+.calculator__calculatedBlock__item__name {
+  color: #7a7a7a;
+  font-weight: 500;
+}
+
+.calculator__calculatedBlock__item__value {
+  color: #2b2b2b;
+  font-weight: 600;
+  font-size: 24px;
+}
+
+.calculator__calculatedBlock__button {
+  width: 100%;
+  border: none;
+  margin-top: 56px;
+  background: #4db663 !important;
+  color: #fff !important;
+  font-size: 18px;
+  height: 56px;
+  border-radius: 8px;
+}
+
+.calculator__calculatedBlock__notice {
+  text-align: center;
+  margin-top: 12px;
+  color: #4f4f4f;
+}
+
+.calculator__calculatedBlock .ant-row {
+  justify-content: space-between;
 }
